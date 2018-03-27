@@ -1,18 +1,17 @@
 
 
 exports.up = function(knex,Promise){
-  knex.schema.createTable('comments', table=>{
+  return  knex.schema.createTable('comments', table=>{
       table.increments('cid').primary();
       table.string('title');
       table.string('post');
       table.timestamp('created_at').defaultTo(knex.fn.now());
-      table.foriegn('auth_id')
-            .references('uid')
+      table.integer('user_id')
+            .references('user_id')
             .inTable('users');
-      table.foriegn('blog_id')
+      table.integer('blog_id')
            .references('blog_id')
            .inTable('blog');
-
   });
 };
 
